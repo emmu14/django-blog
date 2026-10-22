@@ -70,4 +70,4 @@ Open http://127.0.0.1:8000/ in your browser.
 ## Author
 
 **Emmanuvel Christin**
-GitHub: [@emmu14](https://github.com/emmu14) · LinkedIn: <your-link>
+GitHub: [@emmu14](https://github.com/emmu14) · LinkedIn: <https://www.linkedin.com/in/emmanuvel-christin-63b585264/>
