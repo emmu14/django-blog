@@ -1,0 +1,36 @@
+
+{% extends 'baselayout.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/payment_success.css' %}">
+
+<div class="payment-success-page">
+
+    <div class="payment-success">
+
+        <div class="success-icon">✓</div>
+
+        <h1>Payment Successful!</h1>
+
+        <p>Your payment has been completed successfully.</p>
+
+        <p class="success-thank-you">
+            Thank you for your purchase. We appreciate your support!
+        </p>
+
+        <div class="success-actions">
+            <a
+                class="success-button"
+                href="{% url 'articles:list' %}"
+            >
+                ← Continue Shopping
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

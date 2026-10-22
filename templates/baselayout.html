@@ -1,0 +1,99 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Articles{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <header class="navbar">
+
+            <a href="{% url 'home' %}" class="brand">
+                <img
+                    class="logo"
+                    src="{% static 'images/images logo.jpeg' %}"
+                    alt="Articles logo"
+                >
+                <span>InkSpace<span class="brand-dot">.</span></span>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+
+                    <li>
+                        <a href="{% url 'home' %}">Home</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+
+                        <li>
+                            <a href="{% url 'articles:create' %}">
+                                New Article
+                            </a>
+                        </li>
+
+                        <li>
+                            <form class="logout-link"
+                                  action="{% url 'accounts:logout' %}"
+                                  method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-button">
+                                    Logout
+                                </button>
+                            </form>
+                        </li>
+
+                    {% else %}
+
+                        <li>
+                            <a href="{% url 'accounts:login' %}">Login</a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'accounts:signup' %}"
+                               class="signup-button">
+                                Signup
+                            </a>
+                        </li>
+
+                    {% endif %}
+
+                    <li>
+                        <a href="{% url 'articles:cart' %}"
+                           class="cart-button">
+                            Cart
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+        </header>
+
+        <!-- Page content -->
+        <main class="main-content">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made for readers and curious minds.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+
+{% extends 'baselayout.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+
+<div class="checkout-page">
+
+    <div class="checkout-header">
+        <h1>Checkout 💳</h1>
+        <p>Review your order and customer details.</p>
+    </div>
+
+    <div class="checkout-card">
+
+        <h2>Order Summary 🛒</h2>
+
+        {% for item in cart_items %}
+
+            <div class="order-item">
+                <h3>{{ item.title }}</h3>
+                <span class="item-price">₹{{ item.price }}</span>
+            </div>
+
+        {% empty %}
+
+            <p>Your cart is empty.</p>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="checkout-card">
+
+        <h2>Customer Details 👤</h2>
+
+        <p class="customer-detail">
+            <strong>Name:</strong> {{ name }}
+        </p>
+
+        <p class="customer-detail">
+            <strong>Email:</strong> {{ email }}
+        </p>
+
+        <p class="customer-detail">
+            <strong>Address:</strong> {{ address }}
+        </p>
+
+    </div>
+
+    <div class="checkout-card">
+
+        <h2>Payment Method 💳</h2>
+
+        <p class="payment-note">
+            Review your order before continuing to payment.
+        </p>
+
+        <form method="POST" action="{% url 'articles:payment_success' %}">
+            {% csrf_token %}
+
+            <button class="payment-button" type="submit">
+                Pay Now →
+            </button>
+        </form>
+
+    </div>
+
+    <a class="checkout-back" href="{% url 'articles:cart' %}">
+        ← Back to Cart
+    </a>
+
+</div>
+
+{% endblock %}

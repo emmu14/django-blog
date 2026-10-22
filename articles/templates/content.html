@@ -1,0 +1,68 @@
+
+{% extends 'baselayout.html' %}
+
+{% block content %}
+
+<div class="articles-heading">
+    <p class="articles-label">DISCOVER • READ • EXPLORE</p>
+    <h1>Hello Buddy 👋</h1>
+    <p class="articles-subtitle">
+        Discover interesting stories and explore new ideas.
+    </p>
+</div>
+
+<div class="articles">
+
+    {% for article in articles %}
+
+        <div class="article">
+
+            {% if article.thumb %}
+                <a href="{% url 'articles:details' slug=article.slug %}">
+                    <img
+                        class="article-image"
+                        src="{{ article.thumb.url }}"
+                        alt="{{ article.title }}"
+                    >
+                </a>
+            {% endif %}
+
+            <div class="article-content">
+
+                <p class="article-date">
+                    {{ article.date|date:"M d, Y" }}
+                </p>
+
+                <h2>
+                    <a href="{% url 'articles:details' slug=article.slug %}">
+                        {{ article.title }}
+                    </a>
+                </h2>
+
+                <p class="article-snippet">
+                    {{ article.snippet }}
+                </p>
+
+                <a
+                    href="{% url 'articles:details' slug=article.slug %}"
+                    class="read-more"
+                >
+                    Read Article →
+                </a>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <div class="no-articles">
+            <h2>No articles yet</h2>
+            <p>Come back soon to discover new stories.</p>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

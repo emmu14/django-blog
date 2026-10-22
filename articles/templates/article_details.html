@@ -1,0 +1,56 @@
+
+{% extends 'baselayout.html' %}
+
+{% block content %}
+
+<div class="article-detail">
+
+    <a href="{% url 'home' %}" class="back-link">
+        ← Back to articles
+    </a>
+
+    <article class="detail-card">
+
+        <div class="detail-header">
+            <p class="detail-label">ARTICLE DETAILS</p>
+
+            <h1>{{ article.title }}</h1>
+
+            <p class="detail-date">
+                Published on {{ article.date|date:"F d, Y" }}
+            </p>
+        </div>
+
+        {% if article.thumb %}
+            <img
+                class="detail-image"
+                src="{{ article.thumb.url }}"
+                alt="{{ article.title }}"
+            >
+        {% endif %}
+
+        <div class="detail-body">
+            {{ article.body|linebreaks }}
+        </div>
+
+        <div class="detail-footer">
+
+            <div>
+                <p class="detail-price-label">Article price</p>
+                <p class="detail-price">₹{{ article.price }}</p>
+            </div>
+
+            <a
+                href="{% url 'articles:add_to_cart' article.id %}"
+                class="add-cart-button"
+            >
+                Add to Cart →
+            </a>
+
+        </div>
+
+    </article>
+
+</div>
+
+{% endblock %}

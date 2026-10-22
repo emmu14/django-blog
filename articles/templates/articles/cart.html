@@ -1,0 +1,84 @@
+
+{% extends 'baselayout.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+
+<div class="cart-page">
+
+    <div class="cart-header">
+        <h1>My Cart 🛒</h1>
+        <p>Review your selected articles before checkout.</p>
+    </div>
+
+    {% if cart_items %}
+
+        {% for item in cart_items %}
+
+            <div class="cart-item">
+
+                <div class="cart-item-info">
+                    <h2>{{ item.title }}</h2>
+                    <p class="cart-price">₹{{ item.price }}</p>
+                </div>
+
+                <a
+                    class="cart-remove"
+                    href="{% url 'articles:remove_from_cart' item.id %}"
+                >
+                    🗑️ Remove
+                </a>
+
+            </div>
+
+        {% endfor %}
+
+        <div class="cart-summary">
+
+            <div class="cart-total">
+                <h2>Total Amount</h2>
+                <span>₹{{ total }}</span>
+            </div>
+
+            <div class="cart-buttons">
+
+                <a
+                    class="cart-btn continue-btn"
+                    href="{% url 'articles:list' %}"
+                >
+                    ← Continue Shopping
+                </a>
+
+                <a
+                    class="cart-btn checkout-btn"
+                    href="{% url 'articles:checkout' %}"
+                >
+                    Proceed to Checkout →
+                </a>
+
+            </div>
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-cart">
+            <div class="empty-icon">🛒</div>
+            <h2>Your cart is empty</h2>
+            <p>Looks like you haven't added any articles yet.</p>
+
+            <a
+                class="cart-btn checkout-btn"
+                href="{% url 'articles:list' %}"
+            >
+                ← Explore Articles
+            </a>
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
